@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=my_store
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - 5050:80
+
+
+# docker-compose up -d postgres -> inicia postgres
+# docker-compose down postgres -> baja postgres
+# docker-compose ps -> nos muestra los que estan corriendo
+# docker-compose exec postgres bash ---> psql -h localhost -d my_store admin --> \d+
+# docker ps ---> docker inspect "container id"
